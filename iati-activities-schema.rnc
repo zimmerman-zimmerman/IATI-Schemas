@@ -1,0 +1,192 @@
+include "iati-common.rnc"
+
+start=ACTIVITIES
+
+ACTIVITIES = element iati-activities {
+   attribute version { xsd:decimal }?,
+   attribute generated-datetime { xsd:dateTime }?,
+   attribute linked-date-default { xsd:string }?,
+   ACTIVITY*
+}
+
+ACTIVITY = element iati-activity {
+   LANG_ATT? &
+   attribute version { xsd:decimal }? &
+   attribute last-updated-datetime { xsd:dateTime }? &
+   attribute default-currency { xsd:string }? &
+   attribute hierarchy { xsd:integer }? &
+   attribute linked-data-uri { xsd:string }? &
+   ACTIVITY_WEBSITE &
+   REPORTING_ORG &
+   PARTICIPATING_ORG &
+   RECIPIENT_COUNTRY &
+   RECIPIENT_REGION &
+   COLLABORATION_TYPE &
+   DEFAULT_FLOW_TYPE &
+   ## Sample comment 2
+   DEFAULT_AID_TYPE &
+   DEFAULT_FINANCE_TYPE &
+   IATI_IDENTIFIER &
+   OTHER_IDENTIFIER &
+   TITLE &
+   DESCRIPTION &
+   SECTOR &
+   ACTIVITY_DATE &
+   ACTIVITY_STATUS &
+   CONTACT_INFO &
+   DEFAULT_TIED_STATUS &
+   POLICY_MARKER &
+   LOCATION &
+   TRANSACTION &
+   RESULT &
+   CONDITIONS &
+   BUDGET &
+   PLANNED_DISBURSEMENT &
+   RELATED_ACTIVITY &
+   DOCUMENT_LINK &
+   LEGACY_DATA
+}
+
+## sample comment
+ACTIVITY_WEBSITE = element activity-website { xsd:anyURI }
+
+PARTICIPATING_ORG = element participating-org { 
+   REF_TYPE,
+   TYPE_ATT?,
+   attribute role { xsd:string }
+}
+
+RECIPIENT_COUNTRY = element recipient-country { CODE_REQ_TYPE, PERCENTAGE_ATT? }
+
+RECIPIENT_REGION = element recipient-region { CODE_TYPE, PERCENTAGE_ATT? }
+
+COLLABORATION_TYPE = element collaboration-type { CODE_REQ_TYPE }
+
+DEFAULT_FLOW_TYPE = element default-flow-type { CODE_REQ_TYPE }
+
+DEFAULT_AID_TYPE = element default-aid-type { CODE_REQ_TYPE }
+
+DEFAULT_FINANCE_TYPE = element default-finance-type { CODE_REQ_TYPE }
+
+OTHER_IDENTIFIER = element other-identifier {
+   PLAIN_TYPE,
+   attribute owner-ref { xsd:string }?,
+   attribute owner-name { xsd:string }?
+}
+
+SECTOR = element sector {
+   CODE_TYPE,
+   attribute vocabulary { xsd:string }?,
+   PERCENTAGE_ATT?
+}
+
+ACTIVITY_DATE = element activity-date { DATE_TYPE }
+
+ACTIVITY_STATUS = element activity-status { CODE_TYPE }
+
+CONTACT_INFO = element contact-info {
+   element organisation { PLAIN_TYPE } &
+   element person-name { PLAIN_TYPE } &
+   element telephone { PLAIN_TYPE }* &
+   element email { PLAIN_TYPE }* &
+   element mailing-address { PLAIN_TYPE }?
+}
+
+DEFAULT_TIED_STATUS = element default-tied-status { CODE_REQ_TYPE }
+
+POLICY_MARKER = element policy-marker { 
+   CODE_TYPE,
+   attribute vocabulary { xsd:string }?,
+   attribute significance { xsd:string }?
+}
+
+TRANSACTION = element transaction {
+   REF_ATT?,
+   element value { CURRENCY_TYPE },
+   element description { TEXT_TYPE },
+   element transaction-type { CODE_REQ_TYPE },
+   element provider-org { 
+      REF_TYPE,
+      attribute provider-activity-id { xsd:string }?
+   },
+   element receiver-org {
+      REF_TYPE,
+      attribute receiver-activity-id { xsd:string }?
+   },
+   element transaction-date { DATE_REQ_TYPE },
+   element flow-type { CODE_REQ_TYPE },
+   element aid-type { CODE_REQ_TYPE },
+   element finance-type { CODE_REQ_TYPE },
+   element tied-status { CODE_REQ_TYPE },
+   element disbursement-channel { CODE_REQ_TYPE }
+}
+
+LOCATION = element location {
+   PERCENTAGE_ATT? &
+   element location-type { CODE_REQ_TYPE } &
+   element name { TEXT_TYPE }+ &
+   element description { TEXT_TYPE }+ &
+   element administrative {
+      PLAIN_TYPE,
+      attribute country { xsd:string }?,
+      attribute adm1 { xsd:string }?,
+      attribute adm2 { xsd:string }?
+   } &
+   element coordinates {
+      attribute latitude { xsd:decimal },
+      attribute longitude { xsd:decimal },
+      attribute precision { xsd:string }?
+   } &
+   element gazetteer-entry {
+      PLAIN_TYPE,
+      attribute gazetteer-ref { xsd:string }
+   }
+}
+
+RELATED_ACTIVITY = element related-activity { REF_REQ_TYPE, TYPE_ATT }
+
+LEGACY_DATA = element legacy-data {
+   attribute name { xsd:string } &
+   attribute value { xsd:string } &
+   attribute iati-equivalent { xsd:NMTOKEN }?
+}
+
+RESULT = element result {
+   TYPE_ATT &
+   attribute aggregation-status { xsd:boolean }? &
+   TITLE &
+   DESCRIPTION &
+   element indicator { 
+      attribute measure { xsd:string } &
+      attribute ascending { xsd:boolean }? &
+      TITLE &
+      DESCRIPTION &
+      element baseline {
+         attribute year { xsd:positiveInteger } &
+         attribute value { xsd:string } &
+         COMMENT*
+       } &
+      element period {
+         element period-start { DATE_TYPE } &
+         element period-end { DATE_TYPE } &
+         element target {
+            attribute value { xsd:string } &
+            COMMENT*
+         }
+      } &
+      element actual {
+         attribute value { xsd:string } &
+         COMMENT*
+      }
+   }
+}
+
+# FIXME from here on
+
+CONDITIONS = element conditions { PLAIN_TYPE }
+
+BUDGET = element budget { PLAIN_TYPE }
+
+PLANNED_DISBURSEMENT = element planned-disbursement { PLAIN_TYPE }
+
+DOCUMENT_LINK = element document-link { PLAIN_TYPE }

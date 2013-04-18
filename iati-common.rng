@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0" 
+         datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes" 
+         xmlns:h=" http://www.w3.org/1999/xhtml">
+
+  <h:div class="annotation" xml:lang="en">
+    <h:h1>Common markup components</h:h1>
+  </h:div>
+
+  <h:div class="annotation" xml:lang="fr">
+    <h:h1>Composants communs de balisage</h:h1>
+  </h:div>
+
+  <h:div class="annotation" xml:lang="es">
+    <h:h1>Componentes compartidos de marcado</h:h1>
+  </h:div>
+
+  <div h:id="common-elements">
+
+    <h:div class="annotation" xml:lang="en">
+      <h:h2>Common element declarations</h:h2>
+      <h:p>These elements appear in multiple IATI schemas.</h:p>
+    </h:div>
+
+    <h:div class="annotation" xml:lang="fr">
+      <h:h2>Déclarations des éléments partagés</h:h2>
+      <h:p>Ces éléments font partie de plusieurs schémas IATI.</h:p>
+    </h:div>
+
+    <h:div class="annotation" xml:lang="es">
+      <h:h2>Declaraciones de elementos compartidos</h:h2>
+      <h:p>Estos elementos aparecen in varios esquemas de IATI.</h:p>
+    </h:div>
+
+    <define name="TITLE">
+      <element name="title">
+        <h:p class="annotation" xml:lang="en">The name of an activity, organisation, etc.</h:p>
+        <h:p class="annotation" xml:lang="fr">Le nom d'une activité ou organisation.</h:p>
+        <h:p class="annotation" xml:lang="es">El nombre de una actividad o una organización.</h:p>
+        <ref name="TEXT_TYPE"/>
+      </element>
+    </define>
+
+    <define name="DESCRIPTION">
+      <element name="description">
+        <ref name="TEXT_TYPE"/>
+      </element>
+    </define>
+
+    <define name="COMMENT">
+      <element name="comment">
+        <ref name="TEXT_TYPE"/>
+      </element>
+    </define>
+
+    <define name="IATI_IDENTIFIER">
+      <element name="iati-identifier">
+        <ref name="PLAIN_TYPE"/>
+      </element>
+    </define>
+
+    <define name="REPORTING_ORG">
+      <element name="reporting-org">
+        <ref name="REF_TYPE"/>
+        <optional>
+          <ref name="TYPE_ATT"/>
+        </optional>
+      </element>
+    </define>
+
+  </div>
+
+  <div h:id="common-attributes">
+
+    <define name="CODE_ATT">
+      <attribute name="code">
+        <data type="string"/>
+      </attribute>
+    </define>
+
+    <define name="REF_ATT">
+      <attribute name="ref">
+        <data type="string"/>
+      </attribute>
+    </define>
+
+    <define name="TYPE_ATT">
+      <attribute name="type">
+        <data type="string"/>
+      </attribute>
+    </define>
+
+    <define name="LANG_ATT">
+      <attribute name="xml:lang">
+        <data type="string"/>
+      </attribute>
+    </define>
+
+    <define name="DATE_ATT">
+      <attribute name="iso-date">
+        <data type="date"/>
+      </attribute>
+    </define>
+
+    <define name="PERCENTAGE_ATT">
+      <attribute name="percentage">
+        <data type="positiveInteger"/>
+      </attribute>
+    </define>
+
+  </div>
+
+  <div h:id="common-content-types">
+
+    <define name="PLAIN_TYPE">
+      <data type="string"/>
+    </define>
+
+    <define name="TEXT_TYPE">
+      <optional>
+        <ref name="LANG_ATT"/>
+      </optional>
+      <data type="string"/>
+    </define>
+
+    <define name="CODE_TYPE">
+      <optional>
+        <ref name="LANG_ATT"/>
+      </optional>
+      <optional>
+        <ref name="CODE_ATT"/>
+      </optional>
+      <data type="string"/>
+    </define>
+
+    <define name="CODE_REQ_TYPE">
+      <optional>
+        <ref name="LANG_ATT"/>
+      </optional>
+      <ref name="CODE_ATT"/>
+      <data type="string"/>
+    </define>
+
+    <define name="REF_TYPE">
+      <optional>
+        <ref name="LANG_ATT"/>
+      </optional>
+      <optional>
+        <ref name="REF_ATT"/>
+      </optional>
+      <data type="string"/>
+    </define>
+
+    <define name="REF_REQ_TYPE">
+      <optional>
+        <ref name="LANG_ATT"/>
+      </optional>
+      <ref name="REF_ATT"/>
+      <data type="string"/>
+    </define>
+
+    <define name="CURRENCY_TYPE">
+      <optional>
+        <attribute name="currency">
+          <data type="string"/>
+        </attribute>
+      </optional>
+      <attribute name="value-date">
+        <data type="date"/>
+      </attribute>
+      <data type="integer"/>
+    </define>
+
+    <define name="DATE_TYPE">
+      <optional>
+        <ref name="DATE_ATT"/>
+      </optional>
+      <data type="string"/>
+    </define>
+
+    <define name="DATE_REQ_TYPE">
+      <ref name="DATE_ATT"/>
+      <data type="string"/>
+    </define>
+
+  </div>
+
+</grammar>

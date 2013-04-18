@@ -1,0 +1,42 @@
+TITLE = element title { TEXT_TYPE }
+
+DESCRIPTION = element description { TEXT_TYPE }
+
+COMMENT = element comment { TEXT_TYPE }
+
+IATI_IDENTIFIER = element iati-identifier { PLAIN_TYPE }
+
+REPORTING_ORG = element reporting-org { REF_TYPE, TYPE_ATT? }
+
+CODE_ATT = attribute code { xsd:string }
+
+REF_ATT = attribute ref { xsd:string }
+
+TYPE_ATT = attribute type { xsd:string }
+
+LANG_ATT = attribute xml:lang { xsd:string }
+
+DATE_ATT = attribute iso-date { xsd:date }
+
+PERCENTAGE_ATT = attribute percentage { xsd:positiveInteger }
+
+PLAIN_TYPE = xsd:string
+
+TEXT_TYPE = LANG_ATT?, xsd:string
+
+CODE_TYPE = LANG_ATT?, CODE_ATT?, xsd:string
+
+CODE_REQ_TYPE = LANG_ATT?, CODE_ATT, xsd:string
+
+REF_TYPE = LANG_ATT?, REF_ATT?, xsd:string
+
+REF_REQ_TYPE = LANG_ATT?, REF_ATT, xsd:string
+
+CURRENCY_TYPE = 
+   attribute currency { xsd:string }?,
+   attribute value-date { xsd:date },
+   xsd:integer
+
+DATE_TYPE = DATE_ATT?, xsd:string
+  
+DATE_REQ_TYPE = DATE_ATT, xsd:string

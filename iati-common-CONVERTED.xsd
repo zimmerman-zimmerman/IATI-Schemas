@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
+  <xs:element name="title" type="TEXT_TYPE"/>
+  <xs:element name="description" type="TEXT_TYPE"/>
+  <xs:element name="comment" type="TEXT_TYPE"/>
+  <xs:element name="iati-identifier" type="PLAIN_TYPE"/>
+  <xs:element name="reporting-org">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="REF_TYPE">
+          <xs:attribute name="type" type="xs:string"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:attributeGroup name="CODE_ATT">
+    <xs:attribute name="code" use="required" type="xs:string"/>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="REF_ATT">
+    <xs:attribute name="ref" use="required" type="xs:string"/>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="TYPE_ATT">
+    <xs:attribute name="type" use="required" type="xs:string"/>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="LANG_ATT">
+    <xs:attribute ref="xml:lang" use="required"/>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="DATE_ATT">
+    <xs:attribute name="iso-date" use="required" type="xs:date"/>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="PERCENTAGE_ATT">
+    <xs:attribute name="percentage" use="required" type="xs:positiveInteger"/>
+  </xs:attributeGroup>
+  <xs:simpleType name="PLAIN_TYPE">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+  <xs:complexType name="TEXT_TYPE">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute ref="xml:lang"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:simpleType name="CODE_TYPE">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+  <xs:attributeGroup name="CODE_TYPE">
+    <xs:attribute ref="xml:lang"/>
+    <xs:attribute name="code" type="xs:string"/>
+  </xs:attributeGroup>
+  <xs:simpleType name="CODE_REQ_TYPE">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+  <xs:attributeGroup name="CODE_REQ_TYPE">
+    <xs:attribute ref="xml:lang"/>
+    <xs:attributeGroup ref="CODE_ATT"/>
+  </xs:attributeGroup>
+  <xs:complexType name="REF_TYPE">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute ref="xml:lang"/>
+        <xs:attribute name="ref" type="xs:string"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:simpleType name="REF_REQ_TYPE">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+  <xs:attributeGroup name="REF_REQ_TYPE">
+    <xs:attribute ref="xml:lang"/>
+    <xs:attributeGroup ref="REF_ATT"/>
+  </xs:attributeGroup>
+  <xs:simpleType name="CURRENCY_TYPE">
+    <xs:restriction base="xs:integer"/>
+  </xs:simpleType>
+  <xs:attributeGroup name="CURRENCY_TYPE">
+    <xs:attribute name="currency" type="xs:string"/>
+    <xs:attribute name="value-date" use="required" type="xs:date"/>
+  </xs:attributeGroup>
+  <xs:simpleType name="DATE_TYPE">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+  <xs:attributeGroup name="DATE_TYPE">
+    <xs:attribute name="iso-date" type="xs:date"/>
+  </xs:attributeGroup>
+  <xs:simpleType name="DATE_REQ_TYPE">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+  <xs:attributeGroup name="DATE_REQ_TYPE">
+    <xs:attributeGroup ref="DATE_ATT"/>
+  </xs:attributeGroup>
+</xs:schema>
